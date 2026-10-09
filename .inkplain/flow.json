@@ -1,0 +1,137 @@
+{
+  "practical_case": {
+    "id": "mg7uXwCT5p0baP7JYZop",
+    "slug": "purchase-request-approval-agent",
+    "name": "Purchase Request Approval Agent"
+  },
+  "current": "done",
+  "stages": {
+    "intro": {
+      "status": "done",
+      "summary": "Gate 1 approved and completed for Purchase Request Approval Agent practical case 3/6. Created case id mg7uXwCT5p0baP7JYZop in Forward Deployed Engineering profile, level starter; attached four targeted FDE skills; saved and verified seven detailed Introduction sections; created a nature-only, no-human, no-text motivational JPEG cover 400x250 and uploaded via Inkplain MCP (media sc9qZlBW3LkYbNjLhRsO), bound and read-back verified. Repository, .inkp and portal content not started.",
+      "started_at": "2026-10-09T19:47:05.609Z",
+      "finished_at": "2026-10-09T19:50:57.111Z",
+      "updated_by": "api-key:for-chatgpt-test-2",
+      "outputs": {
+        "case_id": "mg7uXwCT5p0baP7JYZop",
+        "portal_url": "/practical-case/purchase-request-approval-agent",
+        "intro_sections": 7,
+        "skills": 4,
+        "cover_media_id": "sc9qZlBW3LkYbNjLhRsO",
+        "cover_size": "400x250",
+        "cover_uploaded": true,
+        "repository_created": false,
+        "planned_repo_org": "Inkplain-Practical-Cases"
+      }
+    },
+    "repo": {
+      "status": "done",
+      "summary": "Stage 2 CI success verified using newly deployed GitHub Actions MCP: workflow run #2 (ID 37985965537) completed successfully. Seven jobs covering STEP-1..STEP-6 and main each completed success; pytest step success for every job; no failed steps. Repository and FINAL.crd already committed and read-back checked.",
+      "started_at": "2026-10-09T20:00:52.752Z",
+      "finished_at": "2026-10-09T20:50:57.741Z",
+      "updated_by": "api-key:for-chatgpt-test-2",
+      "outputs": {
+        "repo_url": "https://github.com/Inkplain-Practical-Cases/practical--purchase-request-approval-agent",
+        "steps": [
+          {
+            "no": 1,
+            "title": "Receive purchase requests",
+            "branch": "step-01-receive-purchase-requests"
+          },
+          {
+            "no": 2,
+            "title": "Evaluate business rules",
+            "branch": "step-02-evaluate-business-rules"
+          },
+          {
+            "no": 3,
+            "title": "Implement workflow state",
+            "branch": "step-03-implement-workflow-state"
+          },
+          {
+            "no": 4,
+            "title": "Add human approval",
+            "branch": "step-04-add-human-approval"
+          },
+          {
+            "no": 5,
+            "title": "Resume suspended workflows",
+            "branch": "step-05-resume-suspended-workflows"
+          },
+          {
+            "no": 6,
+            "title": "Harden and verify",
+            "branch": "step-06-harden-and-verify"
+          }
+        ],
+        "repository_created": true,
+        "gate2_approved": true,
+        "ci_workflow_url": "https://github.com/Inkplain-Practical-Cases/practical--purchase-request-approval-agent/actions/workflows/tests.yml",
+        "ci_expected_jobs": 7,
+        "ci_verified_status": "success",
+        "main_final_crd": true,
+        "final_components": 23,
+        "inkp_pending": true,
+        "ci_run_id": 37985965537,
+        "ci_run_url": "https://github.com/Inkplain-Practical-Cases/practical--purchase-request-approval-agent/actions/runs/37985965537",
+        "ci_verified_jobs": 7,
+        "ci_failed_jobs": 0
+      }
+    },
+    "inkp": {
+      "status": "done",
+      "summary": "Stage 3 completed by explicit user authorization. Generated purchase-request-approval-agent.inkp from all six cumulative STEP-N.crd snapshots and committed to main (3a604e65751d1ed3f7009bd16a22294da18e4ab4). MCP get_inkp_summary verified six ordered STEP-1..STEP-6 tabs, 92 docs (6 diagrams, 86 per-step Process Executors), 0 missing links. Stage 2 still in_progress pending GitHub Actions successful CI evidence; Stage 4 not started.",
+      "started_at": "2026-10-09T20:16:33.890Z",
+      "finished_at": "2026-10-09T20:17:35.011Z",
+      "updated_by": "api-key:for-chatgpt-test-2",
+      "outputs": {
+        "inkp_path": "purchase-request-approval-agent.inkp",
+        "inkp_url": "https://github.com/Inkplain-Practical-Cases/practical--purchase-request-approval-agent/blob/main/purchase-request-approval-agent.inkp",
+        "tabs": [
+          "STEP-1",
+          "STEP-2",
+          "STEP-3",
+          "STEP-4",
+          "STEP-5",
+          "STEP-6"
+        ],
+        "documents": 92,
+        "process_executors": 86,
+        "missing_linked_documents": 0,
+        "commit": "3a604e65751d1ed3f7009bd16a22294da18e4ab4",
+        "stage2_ci_pending": true
+      }
+    },
+    "content": {
+      "status": "done",
+      "summary": "Gate 3 approved; Stage 4 authored 8 categories and 45 portal items: Overview 18 (project overview, structure, 16 independently explained Python-coded What is lessons), six STEP categories with 4 items each (24), Conclusion 3. MCP read-back confirmed all 16 What is items contain substantive Python source_code_content, 8 explanatory sections and zero inkp_visualization/crd_tree. Each STEP System design includes correct STEP-N inkp_visualization and CRD matrix/tree; each CRD component has immediately following github_file pointing to exact branch/path; each added/changed component has 4M (with/without gain/loss), followed immediately by github_file; implementation lessons contain real source and walkthrough. MCP inkp summary six ordered tabs, 92 docs, zero missing linked documents. Stage 2 remains in_progress, pending real GitHub Actions CI evidence.",
+      "started_at": "2026-10-09T20:21:04.012Z",
+      "finished_at": "2026-10-09T20:38:47.236Z",
+      "updated_by": "api-key:for-chatgpt-test-2",
+      "outputs": {
+        "categories": 8,
+        "items": 45,
+        "overview_items": 18,
+        "what_is_items": 16,
+        "what_is_code_samples": 16,
+        "what_is_prohibited_blocks": 0,
+        "step_items": 24,
+        "conclusion_items": 3,
+        "source_branch_paths_verified": true,
+        "components_4m_verified": true,
+        "inkp_tabs": [
+          "STEP-1",
+          "STEP-2",
+          "STEP-3",
+          "STEP-4",
+          "STEP-5",
+          "STEP-6"
+        ],
+        "inkp_missing_linked_documents": 0,
+        "portal_url": "/practical-case/purchase-request-approval-agent",
+        "stage2_ci_pending": true
+      }
+    }
+  },
+  "updated_at": "2026-10-09T20:50:57.741Z"
+}
