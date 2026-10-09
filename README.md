@@ -1,4 +1,4 @@
-# STEP-4 — Human approval
-Run `python -m pip install -r requirements.txt && python -m pytest -q`.
+# STEP-5 — Resume suspended approval workflows
+Use the FastAPI `/docs` page to create a €900 request, record the returned version, then POST a manager action to `/purchase-requests/{id}/decision` with `expected_version`. The manager credential is a local demo fixture only. The transition guard checks version and state while holding the same per-process lock. Tests reject stale versions and duplicate decisions; state/history are not durable beyond process lifetime.
 
-POST /purchase-requests/{id}/decision with Authorization: Bearer local-demo-manager-token and body `{ "action":"approve", "reason":"Manager approved" }` for a pending request. The token is a local demonstration fixture; real production authorization requires verified users, access control, TLS, and organizational policy. Missing/incorrect credentials return 401, self approval 403, stale decisions 409.
+Run `python -m pip install -r requirements.txt && python -m pytest -q`.
