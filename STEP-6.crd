@@ -1,10 +1,10 @@
 {
   "crd_version": 1,
   "name": "Purchase Request Approval Agent",
-  "description": "Versioned purchase workflow transitions and audit history.",
+  "description": "Complete FastAPI purchase approval workflow with safe audit and versioned state transitions.",
   "source": {
     "repo": "github.com/Inkplain-Practical-Cases/practical--purchase-request-approval-agent",
-    "revision": "step-05-resume-suspended-workflows",
+    "revision": "step-06-harden-and-verify",
     "roots": {
       "backend": "app"
     },
@@ -15,11 +15,11 @@
     ]
   },
   "step": {
-    "no": 5,
+    "no": 6,
     "of": 6,
-    "title": "Resume suspended workflows",
-    "branch": "step-05-resume-suspended-workflows",
-    "previous": "STEP-4.crd",
+    "title": "Harden and verify",
+    "branch": "step-06-harden-and-verify",
+    "previous": "STEP-5.crd",
     "removed": []
   },
   "flows": [
@@ -50,7 +50,7 @@
       "source": {
         "file": "app/features/purchase_requests/door.py",
         "symbol": "create_purchase_request",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           10
@@ -59,7 +59,7 @@
       "owner": "purchase_requests",
       "component_reason": "Separately testable door boundary defined in app/features/purchase_requests/door.py.",
       "status": "observed",
-      "step_change": "unchanged",
+      "step_change": "changed",
       "inputs": [],
       "validations": [],
       "operations": [
@@ -93,7 +93,7 @@
       "source": {
         "file": "app/features/purchase_requests/handlers/handle_create_purchase_request.py",
         "symbol": "handle_create_purchase_request",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           7
@@ -136,7 +136,7 @@
       "source": {
         "file": "app/features/purchase_requests/services/service_create_purchase_request.py",
         "symbol": "service_create_purchase_request",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           7
@@ -201,7 +201,7 @@
       "source": {
         "file": "app/features/purchase_requests/schemas/request_input.py",
         "symbol": "PurchaseRequestInput",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           12
@@ -232,7 +232,7 @@
       "source": {
         "file": "app/providers/dependencies.py",
         "symbol": "get_purchase_store",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           8
@@ -275,7 +275,7 @@
       "source": {
         "file": "app/providers/purchase_store/in_memory_purchase_store.py",
         "symbol": "InMemoryPurchaseStore",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           23
@@ -284,7 +284,7 @@
       "owner": "purchase_requests",
       "component_reason": "Separately testable provider boundary defined in app/providers/purchase_store/in_memory_purchase_store.py.",
       "status": "observed",
-      "step_change": "changed",
+      "step_change": "unchanged",
       "inputs": [],
       "validations": [],
       "operations": [
@@ -329,7 +329,7 @@
       "source": {
         "file": "app/core/config.py",
         "symbol": "get_auto_approval_limit",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           10
@@ -360,7 +360,7 @@
       "source": {
         "file": "app/features/purchase_policy/schemas/approval_route.py",
         "symbol": "ApprovalRoute",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           7
@@ -391,7 +391,7 @@
       "source": {
         "file": "app/features/purchase_policy/services/service_evaluate_purchase_policy.py",
         "symbol": "service_evaluate_purchase_policy",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           9
@@ -434,7 +434,7 @@
       "source": {
         "file": "app/features/workflow_state/schemas/purchase_state.py",
         "symbol": "PurchaseState",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           9
@@ -465,7 +465,7 @@
       "source": {
         "file": "app/features/workflow_state/services/service_transition_purchase_state.py",
         "symbol": "service_transition_purchase_state",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           15
@@ -508,7 +508,7 @@
       "source": {
         "file": "app/features/approval/schemas/manager_decision.py",
         "symbol": "ManagerDecision",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           9
@@ -517,7 +517,7 @@
       "owner": "approval",
       "component_reason": "Security and decision schema is distinct from purchasing policy.",
       "status": "observed",
-      "step_change": "changed",
+      "step_change": "unchanged",
       "inputs": [],
       "validations": [],
       "operations": [],
@@ -539,7 +539,7 @@
       "source": {
         "file": "app/providers/identity/dev_manager_identity.py",
         "symbol": "dev_manager_identity",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           14
@@ -570,7 +570,7 @@
       "source": {
         "file": "app/features/approval/services/service_authorize_approver.py",
         "symbol": "service_authorize_approver",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           7
@@ -601,7 +601,7 @@
       "source": {
         "file": "app/features/approval/services/service_record_approval_decision.py",
         "symbol": "service_record_approval_decision",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           18
@@ -666,7 +666,7 @@
       "source": {
         "file": "app/features/approval/handlers/handle_manager_decision.py",
         "symbol": "handle_manager_decision",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           7
@@ -709,7 +709,7 @@
       "source": {
         "file": "app/features/approval/door.py",
         "symbol": "decide_purchase_request",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           13
@@ -763,7 +763,7 @@
       "source": {
         "file": "app/features/workflow_state/errors/version_conflict_error.py",
         "symbol": "VersionConflictError",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           4
@@ -772,7 +772,7 @@
       "owner": "workflow",
       "component_reason": "Dedicated human workflow resume and idempotency boundary.",
       "status": "observed",
-      "step_change": "added",
+      "step_change": "unchanged",
       "inputs": [],
       "validations": [],
       "operations": [],
@@ -794,7 +794,7 @@
       "source": {
         "file": "app/features/workflow_state/services/service_check_state_version.py",
         "symbol": "service_check_state_version",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           7
@@ -803,7 +803,7 @@
       "owner": "workflow",
       "component_reason": "Dedicated human workflow resume and idempotency boundary.",
       "status": "observed",
-      "step_change": "added",
+      "step_change": "unchanged",
       "inputs": [],
       "validations": [],
       "operations": [
@@ -837,7 +837,7 @@
       "source": {
         "file": "app/features/workflow/services/service_resume_purchase_workflow.py",
         "symbol": "service_resume_purchase_workflow",
-        "revision": "step-05-resume-suspended-workflows",
+        "revision": "step-06-harden-and-verify",
         "lines": [
           1,
           12
@@ -846,7 +846,7 @@
       "owner": "workflow",
       "component_reason": "Dedicated human workflow resume and idempotency boundary.",
       "status": "observed",
-      "step_change": "added",
+      "step_change": "changed",
       "inputs": [],
       "validations": [],
       "operations": [
@@ -860,11 +860,139 @@
             "type": "call",
             "label": "calls"
           }
+        },
+        {
+          "id": "log-approval-event",
+          "title": "Log approved decision",
+          "description": "Record safe event metadata after state transition.",
+          "show": true,
+          "calls": {
+            "component": "be.service_log_approval_event",
+            "type": "call",
+            "label": "logs"
+          }
         }
       ],
       "outputs": [],
       "attributes": {
         "step_note": "Added in STEP-5"
+      }
+    },
+    {
+      "id": "be.service_log_approval_event",
+      "name": "service_log_approval_event",
+      "kind": "function",
+      "side": "backend",
+      "layer": "service",
+      "description": "service_log_approval_event: supports safe auditing or reading purchase workflow state.",
+      "flows": [
+        "approval"
+      ],
+      "source": {
+        "file": "app/core/observability.py",
+        "symbol": "service_log_approval_event",
+        "revision": "step-06-harden-and-verify",
+        "lines": [
+          1,
+          9
+        ]
+      },
+      "owner": "purchase_workflow",
+      "component_reason": "Single responsibility enabling inspection and observability.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [],
+      "outputs": [],
+      "attributes": {
+        "step_note": "Added in STEP-6"
+      }
+    },
+    {
+      "id": "be.handle_get_purchase_request",
+      "name": "handle_get_purchase_request",
+      "kind": "function",
+      "side": "backend",
+      "layer": "handler",
+      "description": "handle_get_purchase_request: supports safe auditing or reading purchase workflow state.",
+      "flows": [
+        "intake"
+      ],
+      "source": {
+        "file": "app/features/purchase_requests/handlers/handle_get_purchase_request.py",
+        "symbol": "handle_get_purchase_request",
+        "revision": "step-06-harden-and-verify",
+        "lines": [
+          1,
+          10
+        ]
+      },
+      "owner": "purchase_workflow",
+      "component_reason": "Single responsibility enabling inspection and observability.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [
+        {
+          "id": "call-0",
+          "title": "Call get_purchase_store",
+          "description": "Delegates to known state service",
+          "show": true,
+          "calls": {
+            "component": "be.get_purchase_store",
+            "type": "call",
+            "label": "calls"
+          }
+        }
+      ],
+      "outputs": [],
+      "attributes": {
+        "step_note": "Added in STEP-6"
+      }
+    },
+    {
+      "id": "be.get_purchase_request",
+      "name": "get_purchase_request",
+      "kind": "function",
+      "side": "backend",
+      "layer": "door",
+      "description": "get_purchase_request: supports safe auditing or reading purchase workflow state.",
+      "flows": [
+        "intake"
+      ],
+      "source": {
+        "file": "app/features/purchase_requests/door.py",
+        "symbol": "get_purchase_request",
+        "revision": "step-06-harden-and-verify",
+        "lines": [
+          1,
+          15
+        ]
+      },
+      "owner": "purchase_workflow",
+      "component_reason": "Single responsibility enabling inspection and observability.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [
+        {
+          "id": "call-0",
+          "title": "Call handle_get_purchase_request",
+          "description": "Delegates to known state service",
+          "show": true,
+          "calls": {
+            "component": "be.handle_get_purchase_request",
+            "type": "call",
+            "label": "calls"
+          }
+        }
+      ],
+      "outputs": [],
+      "attributes": {
+        "step_note": "Added in STEP-6"
       }
     }
   ],

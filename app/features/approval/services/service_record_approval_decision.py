@@ -1,4 +1,4 @@
-# Manager decision is checked before resuming a previously pending workflow.
+# Normalize expected domain conflicts without exposing internal state details.
 from fastapi import HTTPException
 from app.providers.dependencies import get_purchase_store
 from app.features.approval.services.service_authorize_approver import service_authorize_approver
@@ -14,4 +14,4 @@ def service_record_approval_decision(request_id:int,manager_id:str,decision:Mana
     try:
         return service_resume_purchase_workflow(request_id,manager_id,decision)
     except (ValueError,VersionConflictError) as exc:
-        raise HTTPException(status_code=409,detail="Approval is stale or no longer pending") from exc
+        raise HTTPException(status_code=409,detail="Purchase decision conflicts with current state") from exc
