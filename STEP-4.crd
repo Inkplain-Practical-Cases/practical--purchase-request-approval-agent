@@ -4,7 +4,7 @@
   "description": "Versioned purchase workflow transitions and audit history.",
   "source": {
     "repo": "github.com/Inkplain-Practical-Cases/practical--purchase-request-approval-agent",
-    "revision": "step-03-implement-workflow-state",
+    "revision": "step-04-add-human-approval",
     "roots": {
       "backend": "app"
     },
@@ -15,11 +15,11 @@
     ]
   },
   "step": {
-    "no": 3,
+    "no": 4,
     "of": 6,
-    "title": "Implement workflow state",
-    "branch": "step-03-implement-workflow-state",
-    "previous": "STEP-2.crd",
+    "title": "Add human approval",
+    "branch": "step-04-add-human-approval",
+    "previous": "STEP-3.crd",
     "removed": []
   },
   "flows": [
@@ -28,6 +28,12 @@
       "name": "Purchase intake",
       "description": "HTTP → handler → service → state store",
       "entry": "be.create_purchase_request"
+    },
+    {
+      "id": "approval",
+      "name": "Human manager approval",
+      "description": "Credentialed manager decision → authorization → store transition",
+      "entry": "be.decide_purchase_request"
     }
   ],
   "components": [
@@ -44,7 +50,7 @@
       "source": {
         "file": "app/features/purchase_requests/door.py",
         "symbol": "create_purchase_request",
-        "revision": "step-03-implement-workflow-state",
+        "revision": "step-04-add-human-approval",
         "lines": [
           1,
           10
@@ -87,7 +93,7 @@
       "source": {
         "file": "app/features/purchase_requests/handlers/handle_create_purchase_request.py",
         "symbol": "handle_create_purchase_request",
-        "revision": "step-03-implement-workflow-state",
+        "revision": "step-04-add-human-approval",
         "lines": [
           1,
           7
@@ -130,7 +136,7 @@
       "source": {
         "file": "app/features/purchase_requests/services/service_create_purchase_request.py",
         "symbol": "service_create_purchase_request",
-        "revision": "step-03-implement-workflow-state",
+        "revision": "step-04-add-human-approval",
         "lines": [
           1,
           7
@@ -139,7 +145,7 @@
       "owner": "purchase_requests",
       "component_reason": "Separately testable service boundary defined in app/features/purchase_requests/services/service_create_purchase_request.py.",
       "status": "observed",
-      "step_change": "changed",
+      "step_change": "unchanged",
       "inputs": [],
       "validations": [],
       "operations": [
@@ -195,7 +201,7 @@
       "source": {
         "file": "app/features/purchase_requests/schemas/request_input.py",
         "symbol": "PurchaseRequestInput",
-        "revision": "step-03-implement-workflow-state",
+        "revision": "step-04-add-human-approval",
         "lines": [
           1,
           12
@@ -226,7 +232,7 @@
       "source": {
         "file": "app/providers/dependencies.py",
         "symbol": "get_purchase_store",
-        "revision": "step-03-implement-workflow-state",
+        "revision": "step-04-add-human-approval",
         "lines": [
           1,
           8
@@ -269,7 +275,7 @@
       "source": {
         "file": "app/providers/purchase_store/in_memory_purchase_store.py",
         "symbol": "InMemoryPurchaseStore",
-        "revision": "step-03-implement-workflow-state",
+        "revision": "step-04-add-human-approval",
         "lines": [
           1,
           23
@@ -278,7 +284,7 @@
       "owner": "purchase_requests",
       "component_reason": "Separately testable provider boundary defined in app/providers/purchase_store/in_memory_purchase_store.py.",
       "status": "observed",
-      "step_change": "changed",
+      "step_change": "unchanged",
       "inputs": [],
       "validations": [],
       "operations": [
@@ -312,7 +318,7 @@
       "source": {
         "file": "app/core/config.py",
         "symbol": "get_auto_approval_limit",
-        "revision": "step-03-implement-workflow-state",
+        "revision": "step-04-add-human-approval",
         "lines": [
           1,
           10
@@ -343,7 +349,7 @@
       "source": {
         "file": "app/features/purchase_policy/schemas/approval_route.py",
         "symbol": "ApprovalRoute",
-        "revision": "step-03-implement-workflow-state",
+        "revision": "step-04-add-human-approval",
         "lines": [
           1,
           7
@@ -374,7 +380,7 @@
       "source": {
         "file": "app/features/purchase_policy/services/service_evaluate_purchase_policy.py",
         "symbol": "service_evaluate_purchase_policy",
-        "revision": "step-03-implement-workflow-state",
+        "revision": "step-04-add-human-approval",
         "lines": [
           1,
           9
@@ -417,7 +423,7 @@
       "source": {
         "file": "app/features/workflow_state/schemas/purchase_state.py",
         "symbol": "PurchaseState",
-        "revision": "step-03-implement-workflow-state",
+        "revision": "step-04-add-human-approval",
         "lines": [
           1,
           9
@@ -426,7 +432,7 @@
       "owner": "workflow_state",
       "component_reason": "Explicit workflow transition boundary.",
       "status": "observed",
-      "step_change": "added",
+      "step_change": "unchanged",
       "inputs": [],
       "validations": [],
       "operations": [],
@@ -448,7 +454,7 @@
       "source": {
         "file": "app/features/workflow_state/services/service_transition_purchase_state.py",
         "symbol": "service_transition_purchase_state",
-        "revision": "step-03-implement-workflow-state",
+        "revision": "step-04-add-human-approval",
         "lines": [
           1,
           15
@@ -457,7 +463,7 @@
       "owner": "workflow_state",
       "component_reason": "Explicit workflow transition boundary.",
       "status": "observed",
-      "step_change": "added",
+      "step_change": "unchanged",
       "inputs": [],
       "validations": [],
       "operations": [
@@ -476,6 +482,250 @@
       "outputs": [],
       "attributes": {
         "step_note": "Added in Step 3"
+      }
+    },
+    {
+      "id": "be.ManagerDecision",
+      "name": "ManagerDecision",
+      "kind": "class",
+      "side": "backend",
+      "layer": "schema",
+      "description": "ManagerDecision: validates and processes a credentialed manager decision without trusting request-body roles.",
+      "flows": [
+        "approval"
+      ],
+      "source": {
+        "file": "app/features/approval/schemas/manager_decision.py",
+        "symbol": "ManagerDecision",
+        "revision": "step-04-add-human-approval",
+        "lines": [
+          1,
+          9
+        ]
+      },
+      "owner": "approval",
+      "component_reason": "Security and decision schema is distinct from purchasing policy.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [],
+      "outputs": [],
+      "attributes": {
+        "step_note": "Added in STEP-4"
+      }
+    },
+    {
+      "id": "be.dev_manager_identity",
+      "name": "dev_manager_identity",
+      "kind": "function",
+      "side": "backend",
+      "layer": "provider",
+      "description": "dev_manager_identity: validates and processes a credentialed manager decision without trusting request-body roles.",
+      "flows": [
+        "approval"
+      ],
+      "source": {
+        "file": "app/providers/identity/dev_manager_identity.py",
+        "symbol": "dev_manager_identity",
+        "revision": "step-04-add-human-approval",
+        "lines": [
+          1,
+          14
+        ]
+      },
+      "owner": "approval",
+      "component_reason": "Security and decision provider is distinct from purchasing policy.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [],
+      "outputs": [],
+      "attributes": {
+        "step_note": "Added in STEP-4"
+      }
+    },
+    {
+      "id": "be.service_authorize_approver",
+      "name": "service_authorize_approver",
+      "kind": "function",
+      "side": "backend",
+      "layer": "service",
+      "description": "service_authorize_approver: validates and processes a credentialed manager decision without trusting request-body roles.",
+      "flows": [
+        "approval"
+      ],
+      "source": {
+        "file": "app/features/approval/services/service_authorize_approver.py",
+        "symbol": "service_authorize_approver",
+        "revision": "step-04-add-human-approval",
+        "lines": [
+          1,
+          7
+        ]
+      },
+      "owner": "approval",
+      "component_reason": "Security and decision service is distinct from purchasing policy.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [],
+      "outputs": [],
+      "attributes": {
+        "step_note": "Added in STEP-4"
+      }
+    },
+    {
+      "id": "be.service_record_approval_decision",
+      "name": "service_record_approval_decision",
+      "kind": "function",
+      "side": "backend",
+      "layer": "service",
+      "description": "service_record_approval_decision: validates and processes a credentialed manager decision without trusting request-body roles.",
+      "flows": [
+        "approval"
+      ],
+      "source": {
+        "file": "app/features/approval/services/service_record_approval_decision.py",
+        "symbol": "service_record_approval_decision",
+        "revision": "step-04-add-human-approval",
+        "lines": [
+          1,
+          18
+        ]
+      },
+      "owner": "approval",
+      "component_reason": "Security and decision service is distinct from purchasing policy.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [
+        {
+          "id": "call-0",
+          "title": "Call service_authorize_approver",
+          "description": "Enforce manager decision boundary",
+          "show": true,
+          "calls": {
+            "component": "be.service_authorize_approver",
+            "type": "call",
+            "label": "calls"
+          }
+        },
+        {
+          "id": "call-1",
+          "title": "Call get_purchase_store",
+          "description": "Enforce manager decision boundary",
+          "show": true,
+          "calls": {
+            "component": "be.get_purchase_store",
+            "type": "call",
+            "label": "calls"
+          }
+        }
+      ],
+      "outputs": [],
+      "attributes": {
+        "step_note": "Added in STEP-4"
+      }
+    },
+    {
+      "id": "be.handle_manager_decision",
+      "name": "handle_manager_decision",
+      "kind": "function",
+      "side": "backend",
+      "layer": "handler",
+      "description": "handle_manager_decision: validates and processes a credentialed manager decision without trusting request-body roles.",
+      "flows": [
+        "approval"
+      ],
+      "source": {
+        "file": "app/features/approval/handlers/handle_manager_decision.py",
+        "symbol": "handle_manager_decision",
+        "revision": "step-04-add-human-approval",
+        "lines": [
+          1,
+          7
+        ]
+      },
+      "owner": "approval",
+      "component_reason": "Security and decision handler is distinct from purchasing policy.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [
+        {
+          "id": "call-0",
+          "title": "Call service_record_approval_decision",
+          "description": "Enforce manager decision boundary",
+          "show": true,
+          "calls": {
+            "component": "be.service_record_approval_decision",
+            "type": "call",
+            "label": "calls"
+          }
+        }
+      ],
+      "outputs": [],
+      "attributes": {
+        "step_note": "Added in STEP-4"
+      }
+    },
+    {
+      "id": "be.decide_purchase_request",
+      "name": "decide_purchase_request",
+      "kind": "function",
+      "side": "backend",
+      "layer": "door",
+      "description": "decide_purchase_request: validates and processes a credentialed manager decision without trusting request-body roles.",
+      "flows": [
+        "approval"
+      ],
+      "source": {
+        "file": "app/features/approval/door.py",
+        "symbol": "decide_purchase_request",
+        "revision": "step-04-add-human-approval",
+        "lines": [
+          1,
+          13
+        ]
+      },
+      "owner": "approval",
+      "component_reason": "Security and decision door is distinct from purchasing policy.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [
+        {
+          "id": "call-0",
+          "title": "Call dev_manager_identity",
+          "description": "Enforce manager decision boundary",
+          "show": true,
+          "calls": {
+            "component": "be.dev_manager_identity",
+            "type": "call",
+            "label": "calls"
+          }
+        },
+        {
+          "id": "call-1",
+          "title": "Call handle_manager_decision",
+          "description": "Enforce manager decision boundary",
+          "show": true,
+          "calls": {
+            "component": "be.handle_manager_decision",
+            "type": "call",
+            "label": "calls"
+          }
+        }
+      ],
+      "outputs": [],
+      "attributes": {
+        "step_note": "Added in STEP-4"
       }
     }
   ],
