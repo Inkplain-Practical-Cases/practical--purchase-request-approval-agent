@@ -1,0 +1,271 @@
+{
+  "crd_version": 1,
+  "name": "Purchase Request Approval Agent",
+  "description": "Complete component relationships of STEP-1 purchase intake.",
+  "source": {
+    "repo": "github.com/Inkplain-Practical-Cases/practical--purchase-request-approval-agent",
+    "revision": "step-01-receive-purchase-requests",
+    "roots": {
+      "backend": "app"
+    },
+    "stacks": [
+      "python",
+      "fastapi",
+      "pydantic"
+    ]
+  },
+  "step": {
+    "no": 1,
+    "of": 6,
+    "title": "Receive purchase requests",
+    "branch": "step-01-receive-purchase-requests",
+    "previous": null,
+    "removed": []
+  },
+  "flows": [
+    {
+      "id": "intake",
+      "name": "Purchase intake",
+      "description": "HTTP → handler → service → state store",
+      "entry": "be.create_purchase_request"
+    }
+  ],
+  "components": [
+    {
+      "id": "be.create_purchase_request",
+      "name": "create_purchase_request",
+      "kind": "function",
+      "side": "backend",
+      "layer": "door",
+      "description": "create_purchase_request implements door responsibilities for the purchase request intake flow.",
+      "flows": [
+        "intake"
+      ],
+      "source": {
+        "file": "app/features/purchase_requests/door.py",
+        "symbol": "create_purchase_request",
+        "revision": "step-01-receive-purchase-requests",
+        "lines": [
+          1,
+          10
+        ]
+      },
+      "owner": "purchase_requests",
+      "component_reason": "Separately testable door boundary defined in app/features/purchase_requests/door.py.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [
+        {
+          "id": "call-1",
+          "title": "Delegate to handle_create_purchase_request",
+          "description": "Invokes handle_create_purchase_request as declared in source.",
+          "show": true,
+          "calls": {
+            "component": "be.handle_create_purchase_request",
+            "type": "call",
+            "label": "calls"
+          }
+        }
+      ],
+      "outputs": [],
+      "attributes": {
+        "step_note": "introduced in STEP-1"
+      }
+    },
+    {
+      "id": "be.handle_create_purchase_request",
+      "name": "handle_create_purchase_request",
+      "kind": "function",
+      "side": "backend",
+      "layer": "handler",
+      "description": "handle_create_purchase_request implements handler responsibilities for the purchase request intake flow.",
+      "flows": [
+        "intake"
+      ],
+      "source": {
+        "file": "app/features/purchase_requests/handlers/handle_create_purchase_request.py",
+        "symbol": "handle_create_purchase_request",
+        "revision": "step-01-receive-purchase-requests",
+        "lines": [
+          1,
+          7
+        ]
+      },
+      "owner": "purchase_requests",
+      "component_reason": "Separately testable handler boundary defined in app/features/purchase_requests/handlers/handle_create_purchase_request.py.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [
+        {
+          "id": "call-1",
+          "title": "Delegate to service_create_purchase_request",
+          "description": "Invokes service_create_purchase_request as declared in source.",
+          "show": true,
+          "calls": {
+            "component": "be.service_create_purchase_request",
+            "type": "call",
+            "label": "calls"
+          }
+        }
+      ],
+      "outputs": [],
+      "attributes": {
+        "step_note": "introduced in STEP-1"
+      }
+    },
+    {
+      "id": "be.service_create_purchase_request",
+      "name": "service_create_purchase_request",
+      "kind": "function",
+      "side": "backend",
+      "layer": "service",
+      "description": "service_create_purchase_request implements service responsibilities for the purchase request intake flow.",
+      "flows": [
+        "intake"
+      ],
+      "source": {
+        "file": "app/features/purchase_requests/services/service_create_purchase_request.py",
+        "symbol": "service_create_purchase_request",
+        "revision": "step-01-receive-purchase-requests",
+        "lines": [
+          1,
+          7
+        ]
+      },
+      "owner": "purchase_requests",
+      "component_reason": "Separately testable service boundary defined in app/features/purchase_requests/services/service_create_purchase_request.py.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [
+        {
+          "id": "call-1",
+          "title": "Delegate to get_purchase_store",
+          "description": "Invokes get_purchase_store as declared in source.",
+          "show": true,
+          "calls": {
+            "component": "be.get_purchase_store",
+            "type": "call",
+            "label": "calls"
+          }
+        }
+      ],
+      "outputs": [],
+      "attributes": {
+        "step_note": "introduced in STEP-1"
+      }
+    },
+    {
+      "id": "be.PurchaseRequestInput",
+      "name": "PurchaseRequestInput",
+      "kind": "class",
+      "side": "backend",
+      "layer": "schema",
+      "description": "PurchaseRequestInput implements schema responsibilities for the purchase request intake flow.",
+      "flows": [
+        "intake"
+      ],
+      "source": {
+        "file": "app/features/purchase_requests/schemas/request_input.py",
+        "symbol": "PurchaseRequestInput",
+        "revision": "step-01-receive-purchase-requests",
+        "lines": [
+          1,
+          12
+        ]
+      },
+      "owner": "purchase_requests",
+      "component_reason": "Separately testable schema boundary defined in app/features/purchase_requests/schemas/request_input.py.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [],
+      "outputs": [],
+      "attributes": {
+        "step_note": "introduced in STEP-1"
+      }
+    },
+    {
+      "id": "be.get_purchase_store",
+      "name": "get_purchase_store",
+      "kind": "function",
+      "side": "backend",
+      "layer": "config",
+      "description": "get_purchase_store implements config responsibilities for the purchase request intake flow.",
+      "flows": [
+        "intake"
+      ],
+      "source": {
+        "file": "app/providers/dependencies.py",
+        "symbol": "get_purchase_store",
+        "revision": "step-01-receive-purchase-requests",
+        "lines": [
+          1,
+          8
+        ]
+      },
+      "owner": "purchase_requests",
+      "component_reason": "Separately testable config boundary defined in app/providers/dependencies.py.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [
+        {
+          "id": "call-1",
+          "title": "Delegate to InMemoryPurchaseStore",
+          "description": "Invokes InMemoryPurchaseStore as declared in source.",
+          "show": true,
+          "calls": {
+            "component": "be.InMemoryPurchaseStore",
+            "type": "call",
+            "label": "calls"
+          }
+        }
+      ],
+      "outputs": [],
+      "attributes": {
+        "step_note": "introduced in STEP-1"
+      }
+    },
+    {
+      "id": "be.InMemoryPurchaseStore",
+      "name": "InMemoryPurchaseStore",
+      "kind": "class",
+      "side": "backend",
+      "layer": "provider",
+      "description": "InMemoryPurchaseStore implements provider responsibilities for the purchase request intake flow.",
+      "flows": [
+        "intake"
+      ],
+      "source": {
+        "file": "app/providers/purchase_store/in_memory_purchase_store.py",
+        "symbol": "InMemoryPurchaseStore",
+        "revision": "step-01-receive-purchase-requests",
+        "lines": [
+          1,
+          23
+        ]
+      },
+      "owner": "purchase_requests",
+      "component_reason": "Separately testable provider boundary defined in app/providers/purchase_store/in_memory_purchase_store.py.",
+      "status": "observed",
+      "step_change": "added",
+      "inputs": [],
+      "validations": [],
+      "operations": [],
+      "outputs": [],
+      "attributes": {
+        "step_note": "introduced in STEP-1"
+      }
+    }
+  ],
+  "dependencies": [],
+  "unresolved": []
+}
