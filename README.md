@@ -1,4 +1,4 @@
-# STEP-2 — Purchase policy routing
+# STEP-3 — Explicit workflow state
 Run `python -m pip install -r requirements.txt && python -m pytest -q`.
 
-Create a request through `POST /purchase-requests` from the FastAPI `/docs` page. Amounts <= €500 are automatically approved; requests over €500 enter `pending_approval`. Step 2 does not provide a manager decision yet. The policy threshold is configurable by `AUTO_APPROVAL_LIMIT_EUR`; this is a demonstration rule, not real procurement policy.
+Each valid request moves from draft to either approved or pending_approval, preserving a versioned history entry. Terminal states cannot move backwards. The state check and record update are atomic under one process-local RLock. This is not durable or multi-worker safe.
