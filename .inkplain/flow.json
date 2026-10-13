@@ -104,7 +104,7 @@
     },
     "content": {
       "status": "done",
-      "summary": "The purchase-state provider is explicitly an in-memory one-process teaching store; README and dependency factory state it is not durable. No source-backed persistent database ERD is created; any future production database is outside the current code.",
+      "summary": "Real purchase HTTP request/outcome SQLite audit introduced at STEP-6; ERD files, Simulator tab and second-position portal item validated.",
       "started_at": "2026-10-09T20:21:04.012Z",
       "finished_at": "2026-10-09T20:38:47.236Z",
       "updated_by": "api-key:for-chatgpt-test-2",
@@ -131,12 +131,14 @@
         "portal_url": "/practical-case/purchase-request-approval-agent",
         "stage2_ci_pending": true,
         "erd_audit_complete": true,
-        "erd_applicable_steps": [],
+        "erd_applicable_steps": [
+          6
+        ],
         "erd_item_title": "Database (Entity) Relations",
-        "erd_lessons_created": 0,
-        "erd_not_applicable": true
+        "erd_lessons_created": 1,
+        "erd_not_applicable": false
       }
     }
   },
-  "updated_at": "2026-10-13T13:40:54.290Z"
+  "updated_at": "2026-10-13T16:16:05.865Z"
 }
