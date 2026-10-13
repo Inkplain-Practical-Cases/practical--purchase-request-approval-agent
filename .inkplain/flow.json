@@ -104,7 +104,7 @@
     },
     "content": {
       "status": "done",
-      "summary": "Gate 3 approved; Stage 4 authored 8 categories and 45 portal items: Overview 18 (project overview, structure, 16 independently explained Python-coded What is lessons), six STEP categories with 4 items each (24), Conclusion 3. MCP read-back confirmed all 16 What is items contain substantive Python source_code_content, 8 explanatory sections and zero inkp_visualization/crd_tree. Each STEP System design includes correct STEP-N inkp_visualization and CRD matrix/tree; each CRD component has immediately following github_file pointing to exact branch/path; each added/changed component has 4M (with/without gain/loss), followed immediately by github_file; implementation lessons contain real source and walkthrough. MCP inkp summary six ordered tabs, 92 docs, zero missing linked documents. Stage 2 remains in_progress, pending real GitHub Actions CI evidence.",
+      "summary": "The purchase-state provider is explicitly an in-memory one-process teaching store; README and dependency factory state it is not durable. No source-backed persistent database ERD is created; any future production database is outside the current code.",
       "started_at": "2026-10-09T20:21:04.012Z",
       "finished_at": "2026-10-09T20:38:47.236Z",
       "updated_by": "api-key:for-chatgpt-test-2",
@@ -129,9 +129,14 @@
         ],
         "inkp_missing_linked_documents": 0,
         "portal_url": "/practical-case/purchase-request-approval-agent",
-        "stage2_ci_pending": true
+        "stage2_ci_pending": true,
+        "erd_audit_complete": true,
+        "erd_applicable_steps": [],
+        "erd_item_title": "Database (Entity) Relations",
+        "erd_lessons_created": 0,
+        "erd_not_applicable": true
       }
     }
   },
-  "updated_at": "2026-10-09T20:50:57.741Z"
+  "updated_at": "2026-10-13T13:40:54.290Z"
 }
