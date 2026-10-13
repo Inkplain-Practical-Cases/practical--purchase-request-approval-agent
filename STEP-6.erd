@@ -1,0 +1,71 @@
+{
+  "erd_version": 1,
+  "name": "purchase-request-approval-agent",
+  "step": 6,
+  "engine": "sqlite",
+  "generated_from": [
+    "app/providers/provider_record_request_audit.py",
+    "app/core/request_audit_middleware.py",
+    "app/main.py"
+  ],
+  "entities": [
+    {
+      "name": "purchase_api_requests",
+      "kind": "table",
+      "step_change": "added",
+      "source": "app/providers/provider_record_request_audit.py",
+      "description": "Purchase approval HTTP request metadata; excludes business request text.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "TEXT",
+          "key": "PK"
+        },
+        {
+          "name": "route",
+          "type": "TEXT"
+        },
+        {
+          "name": "method",
+          "type": "TEXT"
+        },
+        {
+          "name": "created_at",
+          "type": "TEXT"
+        }
+      ]
+    },
+    {
+      "name": "purchase_api_events",
+      "kind": "table",
+      "step_change": "added",
+      "source": "app/providers/provider_record_request_audit.py",
+      "description": "HTTP outcome event for purchase approval route requests.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "key": "PK"
+        },
+        {
+          "name": "request_id",
+          "type": "TEXT",
+          "references": "purchase_api_requests.id"
+        },
+        {
+          "name": "http_status",
+          "type": "INTEGER"
+        },
+        {
+          "name": "duration_ms",
+          "type": "REAL"
+        },
+        {
+          "name": "occurred_at",
+          "type": "TEXT"
+        }
+      ]
+    }
+  ],
+  "relations": []
+}

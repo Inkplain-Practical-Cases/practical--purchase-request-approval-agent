@@ -17,3 +17,6 @@ Automatic approval, human approve/reject, stale version conflict, simultaneous c
 STEP-6.crd is the final step's cumulative architecture; main receives FINAL.crd. Six-tab Simulator belongs to Stage 3 only.
 ## Next
 Use FINAL.crd for Simulator visualization after explicit authorization.
+
+## Database (Entity) Relations
+SQLite stores purchase HTTP requests and outcome events without raw purchase contents. See STEP-6.erd and STEP-6-ERD.
